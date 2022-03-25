@@ -50,7 +50,7 @@ abstract class State {
 			$this->onStart();
 		} catch(Exception) {
 			$className = get_class($this);
-			print_r("Exception during $className start");
+			print_r("Exception during $className start\n");
 		}
 	}
 
@@ -74,7 +74,7 @@ abstract class State {
 			$this->onUpdate();
 		} catch(Exception) {
 			$className = get_class($this);
-			print_r("Exception during $className update");
+			print_r("Exception during $className update\n");
 		}
 
 		$this->updating = false;
@@ -93,7 +93,7 @@ abstract class State {
 			$this->onEnd();
 		} catch(Exception) {
 			$className = get_class($this);
-			print_r("Exception during $className end");
+			print_r("Exception during $className end\n");
 		}
 	}
 
