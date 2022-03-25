@@ -116,9 +116,10 @@ What makes state composition with FSMgasm is that **StateSeries extends State**.
 	}
 ```
 
-Another feature of State (and thus StateSeries) is the `frozen` property.
+Another features of State (and thus StateSeries) are the `frozen` and `unfrozen` methods.
 ```php
 $this->series->frozen();
+$this->series->unfrozen();
 ```
 This prevents State from ending and in the case of StateSeries, stops it from moving to the next state.
 Freezing a state series can be useful when testing and debugging.
