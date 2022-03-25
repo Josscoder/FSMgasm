@@ -6,20 +6,20 @@ use JetBrains\PhpStorm\Pure;
 
 class StateGroup extends StateHolder {
 
-	#[Pure] public function __construct(array $states){
+	#[Pure] public function __construct(array $states = []) {
 		parent::__construct($states);
 	}
 
-	protected function onStart(): void{
-		foreach($this->states as $state) {
+	protected function onStart(): void {
+		foreach ($this->states as $state) {
 			$state->start();
 		}
 	}
 
-	protected function onUpdate(): void{
+	protected function onUpdate(): void {
 		$allEnded = true;
 
-		foreach($this->states as $state) {
+		foreach ($this->states as $state) {
 			$state->update();
 
 			if (!$state->hasEnded()){
@@ -32,16 +32,16 @@ class StateGroup extends StateHolder {
 		}
 	}
 
-	protected function onEnd(): void{
-		foreach($this->states as $state) {
+	protected function onEnd(): void {
+		foreach ($this->states as $state) {
 			$state->end();
 		}
 	}
 
-	public function isReadyToEnd(): bool{
+	public function isReadyToEnd(): bool {
 		$isReadyToEnd = true;
 
-		foreach($this->states as $state) {
+		foreach ($this->states as $state) {
 			if (!$state->isReadyToEnd()){
 				$isReadyToEnd = false;
 			}
@@ -50,7 +50,7 @@ class StateGroup extends StateHolder {
 		return $isReadyToEnd;
 	}
 
-	protected function getDuration(): int{
+	protected function getDuration(): int {
 		return is_null($this->duration) ? 0 : $this->duration;
 	}
 }

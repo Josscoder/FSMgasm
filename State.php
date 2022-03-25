@@ -5,6 +5,7 @@ namespace FSMgasm;
 use Exception;
 
 abstract class State {
+
 	private bool $started = false;
 	private bool $ended = false;
 	private bool $frozen = false;
@@ -25,7 +26,15 @@ abstract class State {
 		return $this->frozen;
 	}
 
-	public function setFrozen(bool $frozen): void{
+	public function frozen(): void {
+		$this->setFrozen(true);
+	}
+
+	public function unfrozen(): void {
+		$this->setFrozen(false);
+	}
+
+	public function setFrozen(bool $frozen): void {
 		$this->frozen = $frozen;
 	}
 

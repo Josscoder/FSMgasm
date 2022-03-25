@@ -11,7 +11,7 @@ abstract class StateHolder extends State implements Iterator {
 	/* @var State[] $states*/
 	protected array $states;
 
-	public function __construct(array $states) {
+	public function __construct(array $states = []) {
 		$this->states = $states;
 	}
 
@@ -43,8 +43,16 @@ abstract class StateHolder extends State implements Iterator {
 		$this->states[] = $newStates;
 	}
 
+	public function frozen(): void {
+		$this->setFrozen(true);
+	}
+
+	public function unfrozen(): void {
+		$this->setFrozen(false);
+	}
+
 	public function setFrozen(bool $frozen): void {
-		foreach($this->states as $state) {
+		foreach ($this->states as $state) {
 			$state->setFrozen($frozen);
 		}
 

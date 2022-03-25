@@ -8,7 +8,7 @@ class StateSeries extends StateHolder {
 
 	protected bool $skipping = false;
 
-	#[Pure] public function __construct(array $states) {
+	#[Pure] public function __construct(array $states = []) {
 		parent::__construct($states);
 	}
 
@@ -19,7 +19,7 @@ class StateSeries extends StateHolder {
 	public function addNextList(array $newStates): void {
 		$index = 1;
 
-		foreach($newStates as $state) {
+		foreach ($newStates as $state) {
 			$this->states[$this->key() + $index] = $state;
 			++$index;
 		}
@@ -71,10 +71,10 @@ class StateSeries extends StateHolder {
 		}
 	}
 
-	protected function getDuration(): int{
+	protected function getDuration(): int {
 		$duration = null;
 
-		foreach($this->states as $state) {
+		foreach ($this->states as $state) {
 			$duration = ($duration + $state->getDuration());
 		}
 

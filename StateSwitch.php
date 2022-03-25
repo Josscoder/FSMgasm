@@ -3,6 +3,7 @@
 namespace FSMgasm;
 
 class StateSwitch {
+
 	protected ?State $currentState = null;
 
 	public function changeState(State $newState): void {
