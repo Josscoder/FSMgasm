@@ -4,7 +4,7 @@ FSMgasm is a PHP [state machine](http://www.skorks.com/2011/09/why-developers-ne
 It is useful to model complex systems, simplify code and facilitate code reuse.
 The library is available under [MIT License](https://tldrlegal.com/license/mit-license).
 
-This was originally created by [Minikloon](github.com/Minikloon), all credits to him
+This was originally created by [Minikloon](https://github.com/Minikloon), all credits to him
 
 # Usage
 
