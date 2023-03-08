@@ -51,6 +51,11 @@ class StateGroup extends StateHolder
 
     protected function getDuration(): int
     {
-        return is_null($this->duration) ? 0 : $this->duration;
+        $statesDuration = array_map(function ($state) {
+            return $state->getDuration();
+        }, $this->states);
+        $maxDuration = max($statesDuration);
+
+        return empty($statesDuration) ? 0 : $maxDuration;
     }
 }
