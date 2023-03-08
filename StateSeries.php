@@ -15,7 +15,6 @@ class StateSeries extends StateHolder
     public function addNextList(array $newStates): void
     {
         $index = 1;
-
         foreach ($newStates as $state) {
             $this->states[$this->key() + $index] = $state;
             ++$index;
@@ -31,7 +30,6 @@ class StateSeries extends StateHolder
     {
         if (empty($this->states)) {
             $this->end();
-
             return;
         }
 
@@ -42,18 +40,16 @@ class StateSeries extends StateHolder
     {
         $this->current()->update();
 
-        if (($this->current()->isReadyToEnd() &&
-                !$this->current()->isFrozen()) || $this->skipping
-        ) {
+        if (($this->current()->isReadyToEnd() && !$this->current()->isFrozen()) || $this->skipping) {
             if ($this->skipping) {
                 $this->skipping = false;
-                $this->current()->end();
-                $this->next();
             }
+
+            $this->current()->end();
+            $this->next();
 
             if ($this->key() >= count($this->states)) {
                 $this->end();
-
                 return;
             }
 
@@ -75,12 +71,12 @@ class StateSeries extends StateHolder
 
     protected function getDuration(): int
     {
-        $duration = null;
+        $duration = 0;
 
         foreach ($this->states as $state) {
             $duration += $state->getDuration();
         }
 
-        return is_null($duration) ? 0 : $duration;
+        return $duration;
     }
 }

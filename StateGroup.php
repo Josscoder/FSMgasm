@@ -5,19 +5,6 @@ namespace FSMgasm;
 class StateGroup extends StateHolder
 {
 
-    public function isReadyToEnd(): bool
-    {
-        $isReadyToEnd = true;
-
-        foreach ($this->states as $state) {
-            if (!$state->isReadyToEnd()) {
-                $isReadyToEnd = false;
-            }
-        }
-
-        return $isReadyToEnd;
-    }
-
     protected function onStart(): void
     {
         foreach ($this->states as $state) {
@@ -27,15 +14,13 @@ class StateGroup extends StateHolder
 
     protected function onUpdate(): void
     {
-        $allEnded = true;
-
         foreach ($this->states as $state) {
             $state->update();
-
-            if (!$state->hasEnded()) {
-                $allEnded = false;
-            }
         }
+
+        $allEnded = array_reduce($this->states, function($carry, $state) {
+            return $carry && $state->hasEnded();
+        }, true); //TODO: need test
 
         if ($allEnded) {
             $this->end();
@@ -47,6 +32,13 @@ class StateGroup extends StateHolder
         foreach ($this->states as $state) {
             $state->end();
         }
+    }
+
+    public function isReadyToEnd(): bool
+    {
+        return array_reduce($this->states, function($carry, $state) {
+            return $carry && $state->isReadyToEnd();
+        }, true); //TODO: need test
     }
 
     protected function getDuration(): int

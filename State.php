@@ -7,12 +7,17 @@ use Exception;
 abstract class State
 {
 
-    protected ?int $duration = null;
+    protected int $duration = 0;
     private bool $started = false;
     private bool $ended = false;
     private bool $frozen = false;
     private int $startTime;
     private bool $updating = false;
+
+    protected function getDuration(): int
+    {
+        return $this->duration;
+    }
 
     public function hasStarted(): bool
     {
@@ -86,20 +91,7 @@ abstract class State
         $this->updating = false;
     }
 
-    public function isReadyToEnd(): bool
-    {
-        return $this->ended || $this->getRemainingDuration() == 0;
-    }
-
-    public function getRemainingDuration(): int
-    {
-        $sinceStart = $this->startTime - time();
-        $remaining = $this->getDuration() - $sinceStart;
-
-        return max($remaining, 0);
-    }
-
-    protected abstract function getDuration(): int;
+    protected abstract function onUpdate(): void;
 
     public function end(): void
     {
@@ -119,5 +111,17 @@ abstract class State
 
     protected abstract function onEnd(): void;
 
-    protected abstract function onUpdate(): void;
+    public function isReadyToEnd(): bool
+    {
+        return $this->ended || $this->getRemainingDuration() == 0;
+    }
+
+    public function getRemainingDuration(): int
+    {
+        $sinceStart = (time() - $this->startTime);
+
+        $remaining = $this->getDuration() - $sinceStart;
+
+        return max($remaining, 0);
+    }
 }

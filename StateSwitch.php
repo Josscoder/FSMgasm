@@ -9,13 +9,17 @@ class StateSwitch
 
     public function changeState(State $newState): void
     {
-        $this->currentState->end();
+        if (!is_null($this->currentState)) {
+            $this->currentState->end();
+        }
         $this->currentState = $newState;
         $newState->start();
     }
 
     public function update(): void
     {
-        $this->currentState->update();
+        if (!is_null($this->currentState)) {
+            $this->currentState->update();
+        }
     }
 }
