@@ -49,6 +49,7 @@ Keep in mind **FSMgasm doesn't handle state execution for you**.
 This means there is no black magic behind using your newly-created state.
 
 Using your state:
+
 ```php
 	public function main(): void {
 		$state = new PrintState("Hello world!");
@@ -57,7 +58,8 @@ Using your state:
 	}
 ```
 
-State does guarantee that `onStart()` and `onEnd()` will only be called once and that only a single onUpdate will be executed at a time.
+State does guarantee that `onStart()` and `onEnd()` will only be called once and that only a single onUpdate will be
+executed at a time.
 It also checks that `start()` has been called before continuing execution of `update()` and `end()`.
 These guarantees are retained in a multithreaded environment.
 
@@ -67,7 +69,8 @@ There are two classes to help you compose states together.
 
 #### StateSeries
 
-StateSeries lets you compose your states sequentially. It is typical to use a state series as the "main state" of a system.
+StateSeries lets you compose your states sequentially. It is typical to use a state series as the "main state" of a
+system.
 
 ```php
 	public function main(): void {
@@ -83,14 +86,19 @@ StateSeries lets you compose your states sequentially. It is typical to use a st
 	}
 ```
 
-StateSeries will take care of checking whether the current state is over and switch to the next state in its update method.
-Typically a state is over when it lasted for more than its duration. Duration is included in State because of how common it is.
+StateSeries will take care of checking whether the current state is over and switch to the next state in its update
+method.
+Typically a state is over when it lasted for more than its duration. Duration is included in State because of how common
+it is.
 If your state doesn't need duration, you can override `State::isReadyToEnd` to setup your own ending condition.
 
-You can setup a StateSeries either using the vararg constructor, a list of states, or adding them manually after construction using `StateSeries::add`.
-`add` will add a state to the end of the series and can be used after initialization. `addNext` can be used to add a state right after the current state.
+You can setup a StateSeries either using the vararg constructor, a list of states, or adding them manually after
+construction using `StateSeries::add`.
+`add` will add a state to the end of the series and can be used after initialization. `addNext` can be used to add a
+state right after the current state.
 
 What makes state composition with FSMgasm is that **StateSeries extends State**. This means you can do something like:
+
 ```php
 	public function main(): void {
 		$series = new StateSeries([
@@ -117,10 +125,12 @@ What makes state composition with FSMgasm is that **StateSeries extends State**.
 ```
 
 Another features of State (and thus StateSeries) are the `frozen` and `unfrozen` methods.
+
 ```php
 $this->series->frozen();
 $this->series->unfrozen();
 ```
+
 This prevents State from ending and in the case of StateSeries, stops it from moving to the next state.
 Freezing a state series can be useful when testing and debugging.
 
@@ -139,15 +149,19 @@ All the states within a StateGroup will be started on `StateGroup::start`, simil
 		$group->end();
 	}
 ```
+
 StateGroup also extends State.
 
 #### StateProxy
 
-In some cases, you can't know all the states which are going to be needed at initialization ahead of time in a StateSeries.
+In some cases, you can't know all the states which are going to be needed at initialization ahead of time in a
+StateSeries.
 
 For example, when modeling [Build Battle](https://www.youtube.com/watch?v=PXM5Xgjkhwo), the game starts with 12 players
-all building at the same time for 5 minutes. After the build time, players are teleported to each build for 30 seconds one
+all building at the same time for 5 minutes. After the build time, players are teleported to each build for 30 seconds
+one
 at a time for judging. Builds of players who left aren't available for judging. This situation can modeled like so:
+
 ~~~~
 StateSeries:
     1. StateGroup(12 x BuildState)
@@ -156,6 +170,7 @@ StateSeries:
 ~~~~
 
 A StateProxy may be implemented like this:
+
 ```php
 <?php
 
@@ -179,13 +194,16 @@ class TwelveYearsAState extends StateProxy {
 
 #### StateSwitch
 
-Not all situations can be easily modeled using a StateSeries, for example a game's menus. The player's navigation through the menus
+Not all situations can be easily modeled using a StateSeries, for example a game's menus. The player's navigation
+through the menus
 could go as such:
+
 ~~~~
 MainMenuState => OptionMenuState => MainMenuState => StartGameState.
 ~~~~
 
 This is where StateSwitch comes into play. It's a simple class which can be used as such:
+
 ```php
     public function main(): void {
        $switch = new StateSwitch();
