@@ -1,0 +1,22 @@
+{
+  "name": "josscoder/fsmgasm",
+  "description": "Flexible state machine library\n\n",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "FSMgasm\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Josscoder",
+      "email": "josscoder@hotmail.com"
+    },
+    {
+      "name": "Minikloon"
+    }
+  ],
+  "require": {
+    "php": "^8.1"
+  }
+}
