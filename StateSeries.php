@@ -78,7 +78,7 @@ class StateSeries extends StateHolder
         $duration = null;
 
         foreach ($this->states as $state) {
-            $duration = ($duration + $state->getDuration());
+            $duration += $state->getDuration();
         }
 
         return is_null($duration) ? 0 : $duration;
