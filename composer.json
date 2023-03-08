@@ -1,6 +1,6 @@
 {
   "name": "josscoder/fsmgasm",
-  "description": "Flexible state machine library\n\n",
+  "description": "Flexible state machine library",
   "type": "library",
   "autoload": {
     "psr-4": {
