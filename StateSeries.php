@@ -33,8 +33,6 @@ class StateSeries extends StateHolder
             return;
         }
 
-        echo "calling onStart";
-
         $this->current()->start();
     }
 
