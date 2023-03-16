@@ -49,7 +49,7 @@ abstract class StateHolder extends State implements Iterator
 
     public function addAll(array $newStates): void
     {
-        $this->states[] = $newStates;
+        $this->states = array_merge($this->states, $newStates);
     }
 
     public function freeze(): void
