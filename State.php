@@ -39,12 +39,12 @@ abstract class State
         $this->frozen = $frozen;
     }
 
-    public function frozen(): void
+    public function freeze(): void
     {
         $this->setFrozen(true);
     }
 
-    public function unfrozen(): void
+    public function unfreeze(): void
     {
         $this->setFrozen(false);
     }

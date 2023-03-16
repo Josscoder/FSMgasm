@@ -52,7 +52,7 @@ abstract class StateHolder extends State implements Iterator
         $this->states[] = $newStates;
     }
 
-    public function frozen(): void
+    public function freeze(): void
     {
         $this->setFrozen(true);
     }
@@ -66,7 +66,7 @@ abstract class StateHolder extends State implements Iterator
         parent::setFrozen($frozen);
     }
 
-    public function unfrozen(): void
+    public function unfreeze(): void
     {
         $this->setFrozen(false);
     }
