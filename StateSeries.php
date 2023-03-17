@@ -79,4 +79,13 @@ class StateSeries extends StateHolder
 
         return $duration;
     }
+
+    public function cleanup(): void
+    {
+        foreach ($this->states as $state) {
+            $state->cleanup();
+        }
+
+        parent::cleanup();
+    }
 }
