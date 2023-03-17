@@ -124,4 +124,12 @@ abstract class State
 
         return max($remaining, 0);
     }
+
+    public function cleanup(): void
+    {
+        $this->started = false;
+        $this->ended = false;
+        $this->frozen = false;
+        $this->updating = false;
+    }
 }

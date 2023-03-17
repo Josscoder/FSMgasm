@@ -24,11 +24,8 @@ abstract class StateHolder extends State implements Iterator
 
     public function previous(): void
     {
-        echo 'current';
-        echo $this->key();
+        $this->current()->cleanup();
         $this->current = max(($this->current - 1), 0);
-        echo 'current-previous';
-        echo $this->key();
     }
 
     public function next(): void
