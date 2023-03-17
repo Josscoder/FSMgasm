@@ -27,8 +27,10 @@ abstract class StateHolder extends State implements Iterator
         $state = $this->current();
 
         if ($state instanceof StateSeries) {
-            $this->current()->cleanup();
-            $this->current = 0;
+            $state->cleanup();
+            $state->current = 0;
+        } else {
+            $state->cleanup();
         }
 
         $this->current = max(($this->current - 1), 0);
