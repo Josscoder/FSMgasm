@@ -83,4 +83,10 @@ class StateSeries extends StateHolder
 
         return $duration;
     }
+
+    public function cleanup(): void
+    {
+        parent::cleanup();
+        $this->current = 0;
+    }
 }
