@@ -12,6 +12,10 @@ class StateSeries extends StateHolder
         $this->states[$this->key() + 1] = $state;
     }
 
+    /**
+     * @param State[] $newStates
+     * @return void
+     */
     public function addNextList(array $newStates): void
     {
         $index = 1;
@@ -78,12 +82,5 @@ class StateSeries extends StateHolder
         }
 
         return $duration;
-    }
-
-    public function cleanup(): void
-    {
-        foreach ($this->states as $state) {
-            $state->cleanup();
-        }
     }
 }
