@@ -24,22 +24,19 @@ abstract class StateHolder extends State implements Iterator
 
     public function previous(): void
     {
-        /*$state = $this->current();
-
-        if ($state instanceof StateSeries) {
-            $state->cleanup();
-            $state->current = 0;
-        } else {
-            $state->cleanup();
-        }*/
-
         $i = 0;
         foreach ($this->states as $state) {
             var_dump(sprintf('K = %s, V = %s\n', $i, get_class($state)));
+            ++$i;
         }
 
-        $this->current()->cleanup();
+        $state = $this->current();
+        var_dump(sprintf('K = %s, V = %s\n', $this->key(), get_class($state)));
+
+        $state->cleanup();
         $this->current = max(($this->current - 1), 0);
+
+        var_dump(sprintf('K = %s, V = %s\n', $this->key(), get_class($this->current())));
     }
 
     public function next(): void
