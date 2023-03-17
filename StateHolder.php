@@ -24,13 +24,12 @@ abstract class StateHolder extends State implements Iterator
 
     public function previous(): void
     {
-        $state = $this->current();
-        $state->cleanup();
-        if ($state instanceof StateSeries) {
-            $state->start();
-        }
+        $this->current()->cleanup();
+        $this->current = max($this->key() - 1, 0);
 
-        $this->current = max(($this->current - 1), 0);
+        if ($this->current() instanceof StateSeries) {
+            $this->current()->start();
+        }
     }
 
     public function next(): void
