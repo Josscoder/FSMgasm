@@ -32,7 +32,7 @@ abstract class StateHolder extends State implements Iterator
         } else {
             $state->cleanup();
         }*/
-        var_dump($this->states);
+        print_r($this->states);
         $this->current()->cleanup();
         $this->current = max(($this->current - 1), 0);
     }
