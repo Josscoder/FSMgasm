@@ -24,11 +24,13 @@ abstract class StateHolder extends State implements Iterator
 
     public function previous(): void
     {
-        var_dump($this->current()->getRemainingDuration());
-        $this->current()->cleanup();
+        $oldState = $this->current();
+        $oldState->cleanup();
         $this->current = max($this->key() - 1, 0);
-        $this->current()->start();
-        var_dump($this->current()->getRemainingDuration());
+
+        $newState = $this->current();
+        $newState->cleanup();
+        $newState->start();
     }
 
     public function next(): void
