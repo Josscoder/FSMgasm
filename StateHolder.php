@@ -24,15 +24,16 @@ abstract class StateHolder extends State implements Iterator
 
     public function previous(): void
     {
-        $state = $this->current();
+        /*$state = $this->current();
 
         if ($state instanceof StateSeries) {
             $state->cleanup();
             $state->current = 0;
         } else {
             $state->cleanup();
-        }
-
+        }*/
+        var_dump($this->states);
+        $this->current()->cleanup();
         $this->current = max(($this->current - 1), 0);
     }
 
