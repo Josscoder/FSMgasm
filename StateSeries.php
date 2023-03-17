@@ -85,7 +85,5 @@ class StateSeries extends StateHolder
         foreach ($this->states as $state) {
             $state->cleanup();
         }
-
-        parent::cleanup();
     }
 }
