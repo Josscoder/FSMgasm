@@ -22,6 +22,11 @@ abstract class StateHolder extends State implements Iterator
         return $this->states[$this->current];
     }
 
+    public function previous(): void
+    {
+        $this->current = max(($this->current - 1), 0);
+    }
+
     public function next(): void
     {
         ++$this->current;
