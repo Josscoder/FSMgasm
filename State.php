@@ -52,8 +52,10 @@ abstract class State
     public function start(): void
     {
         if ($this->started || $this->ended) {
+            var_dump('cant calling start');
             return;
         }
+        var_dump('calling start');
 
         $this->started = true;
         $this->startTime = time();
