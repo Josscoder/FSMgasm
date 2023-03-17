@@ -30,7 +30,16 @@ abstract class StateHolder extends State implements Iterator
 
         $newState = $this->current();
         $newState->cleanup();
-        $newState->start();
+    }
+
+    public function cleanup(): void
+    {
+        parent::cleanup();
+        $this->current = 0;
+
+        foreach ($this->states as $state) {
+            $state->cleanup();
+        }
     }
 
     public function next(): void
