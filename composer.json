@@ -2,6 +2,9 @@
   "name": "josscoder/fsmgasm",
   "description": "Flexible state machine library",
   "type": "library",
+  "require": {
+    "php": "^8.2"
+  },
   "autoload": {
     "psr-4": {
       "FSMgasm\\": "/"
@@ -15,8 +18,5 @@
     {
       "name": "Minikloon"
     }
-  ],
-  "require": {
-    "php": "^8.2"
-  }
+  ]
 }
